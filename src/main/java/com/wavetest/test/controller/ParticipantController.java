@@ -16,8 +16,8 @@ public class ParticipantController {
     private final ParticipantService participantService;
 
     @GetMapping("/{id}")
-    public List<ParticipantDTO> getAllParticipantByPresentationId(@PathVariable Long id) {
-        return participantService.getAllParticipantByPresentationId(id);
+    public List<ParticipantDTO> getAllParticipantByPresentationId(@PathVariable("id") Long presentationId) {
+        return participantService.getAllParticipantByPresentationId(presentationId);
     }
 
     @DeleteMapping("/{id}")
@@ -30,7 +30,8 @@ public class ParticipantController {
         return participantService.updateParticipant(participantDTO);
     }
 
-    //TODO: написать метод для добавления нового Слушателя по userId,
-    // проверка записан ли он уже в данной презентации
-
+    @PostMapping("/{id}")
+    public ResponseEntity<?> signUpToPresentation(@PathVariable("id") Long presentationId) {
+        return participantService.signUpToPresentation(presentationId);
+    }
 }

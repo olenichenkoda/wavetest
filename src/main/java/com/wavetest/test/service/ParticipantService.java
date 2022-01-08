@@ -3,17 +3,20 @@ package com.wavetest.test.service;
 import com.wavetest.test.entity.Participant;
 import com.wavetest.test.entity.Presentation;
 import com.wavetest.test.entity.Role;
+import com.wavetest.test.entity.User;
 import com.wavetest.test.entity.dto.ParticipantDTO;
 import com.wavetest.test.repository.ParticipantRepository;
 import com.wavetest.test.repository.PresentationRepository;
 import com.wavetest.test.repository.RoleRepository;
+import com.wavetest.test.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpStatusCodeException;
+
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,20 +24,21 @@ import java.util.stream.Collectors;
 public class ParticipantService {
 
     private final ParticipantRepository participantRepository;
+    private final PresentationRepository presentationRepository;
+    private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-//    private final PresentationRepository presentationRepository;
 
     @Transactional
-    public List<ParticipantDTO> getAllParticipantByPresentationId(Long id) {
+    public List<ParticipantDTO> getAllParticipantByPresentationId(Long presentationId) {
 
-        List<Participant> participants = participantRepository.getAllParticipantByPresentationId(id);
+        List<Participant> participants = participantRepository.getAllParticipantByPresentationId(presentationId);
         List<ParticipantDTO> resultPDTO =
                 participants.stream().collect(Collectors.mapping(t -> new ParticipantDTO(
-                                        t.getId(),
-                                        t.getUser().getFirstName(),
-                                        t.getUser().getLastName(),
-                                        t.getRole().getNameRole())
-                                , Collectors.toList()));
+                                t.getId(),
+                                t.getUser().getFirstName(),
+                                t.getUser().getLastName(),
+                                t.getRole().getNameRole())
+                        , Collectors.toList()));
 
         return resultPDTO;
     }
@@ -58,7 +62,7 @@ public class ParticipantService {
     @Transactional
     public ParticipantDTO updateParticipant(ParticipantDTO participantDTO) {
         Participant participant = participantRepository.getById(participantDTO.getIdParticipant());
-        Role role =  roleRepository.getByNameRole(participantDTO.getRoleOnPresentation());
+        Role role = roleRepository.getByNameRole(participantDTO.getRoleOnPresentation());
         participant.setRole(role);
         participant = participantRepository.save(participant);
 
@@ -68,5 +72,33 @@ public class ParticipantService {
                         participant.getUser().getLastName(),
                         participant.getRole().getNameRole());
         return resultParticipantDTO;
+    }
+
+    @Transactional
+    public ResponseEntity<?> signUpToPresentation(Long presentationId) {
+
+        //TODO: брать UserId из security
+        User user = userRepository.getById(6L);
+
+        Optional<Participant> isParticipantExists =
+                participantRepository.isParticipantExistsOnPresentation(user.getId(), presentationId);
+        if (isParticipantExists.isPresent()) {
+            return ResponseEntity.badRequest().body("Пользователь уже присутствует в данной презентации");
+        } else {
+            Presentation presentation = presentationRepository.getById(presentationId);
+            Participant addParticipant = new Participant();
+            addParticipant.setPresentation(presentation);
+            addParticipant.setUser(user);
+            Role role = roleRepository.getByNameRole("Listener");
+            addParticipant.setRole(role);
+            addParticipant = participantRepository.save(addParticipant);
+
+            ParticipantDTO participantDTO = new ParticipantDTO(
+                    addParticipant.getId(),
+                    addParticipant.getUser().getFirstName(),
+                    addParticipant.getUser().getLastName(),
+                    addParticipant.getRole().getNameRole());
+            return ResponseEntity.ok(participantDTO);
+        }
     }
 }
