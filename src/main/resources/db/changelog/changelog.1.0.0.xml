@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1000000001" author="DOlenichenko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="role"/>
+            </not>
+        </preConditions>
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_role"/>
+            </column>
+            <column name="name_role" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1000000002" author="DOlenichenko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+            </column>
+            <column name="first_name" type="VARCHAR(30)"/>
+            <column name="last_name" type="VARCHAR(30)"/>
+            <column name="email" type="VARCHAR(30)"/>
+            <column name="password" type="VARCHAR(30)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1000000003" author="DOlenichenko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_role"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_role">
+            <column name="user_id" type="INT">
+                <constraints foreignKeyName="fk_user_id" references="user(id)"/>
+            </column>
+            <column name="role_id" type="INT">
+                <constraints foreignKeyName="fk_role_id" references="role(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1000000004" author="DOlenichenko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="room"/>
+            </not>
+        </preConditions>
+        <createTable tableName="room">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_room"/>
+            </column>
+            <column name="name_room" type="VARCHAR(10)"/>
+            <column name="number_of_seats" type="INT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1000000005" author="DOlenichenko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="presentation"/>
+            </not>
+        </preConditions>
+        <createTable tableName="presentation">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_presentation"/>
+            </column>
+            <column name="theme" type="VARCHAR(30)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1000000006" author="DOlenichenko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="participant"/>
+            </not>
+        </preConditions>
+        <createTable tableName="participant">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_participant"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints foreignKeyName="fk_user_id" references="user(id)"/>
+            </column>
+            <column name="presentation_id" type="BIGINT">
+                <constraints foreignKeyName="fk_presentation_id" references="presentation(id)"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints foreignKeyName="fk_role_id" references="role(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1000000007" author="DOlenichenko">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="schedule"/>
+            </not>
+        </preConditions>
+        <createTable tableName="schedule">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_schedule"/>
+            </column>
+            <column name="room_id" type="BIGINT">
+                <constraints foreignKeyName="fk_room_id" references="room(id)"/>
+            </column>
+            <column name="presentation_id" type="BIGINT">
+                <constraints foreignKeyName="fk_presentation_id" references="presentation(id)"/>
+            </column>
+            <column name="time_begin" type="DATETIME"/>
+            <column name="time_end" type="DATETIME"/>
+            <column name="number_of_participants" type="INT"/>
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>

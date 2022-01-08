@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1010000001" author="DOlenichenko">
+        <insert tableName="user">
+            <column name="first_name" value="Admin"/>
+            <column name="last_name" value="Root"/>
+            <column name="email" value="admin@wavetest.com"/>
+            <column name="password" value="root"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="first_name" value="Ivan"/>
+            <column name="last_name" value="Ivanov"/>
+            <column name="email" value="ivanov@wavetest.com"/>
+            <column name="password" value="12345678"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="first_name" value="Petr"/>
+            <column name="last_name" value="Petrov"/>
+            <column name="email" value="petrov@wavetest.com"/>
+            <column name="password" value="12345678"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="first_name" value="Mariya"/>
+            <column name="last_name" value="Maslova"/>
+            <column name="email" value="maslova@wavetest.com"/>
+            <column name="password" value="12345678"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="first_name" value="Olga"/>
+            <column name="last_name" value="Sokolova"/>
+            <column name="email" value="sokolova@wavetest.com"/>
+            <column name="password" value="12345678"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="first_name" value="Vasiliy"/>
+            <column name="last_name" value="Vasiliev"/>
+            <column name="email" value="vasiliev@wavetest.com"/>
+            <column name="password" value="12345678"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="first_name" value="Aleksandr"/>
+            <column name="last_name" value="Aleksandrov"/>
+            <column name="email" value="aleksandrov@wavetest.com"/>
+            <column name="password" value="12345678"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="first_name" value="Elena"/>
+            <column name="last_name" value="Esenina"/>
+            <column name="email" value="esenina@wavetest.com"/>
+            <column name="password" value="12345678"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="first_name" value="Anna"/>
+            <column name="last_name" value="Anyukova"/>
+            <column name="email" value="anyukova@wavetest.com"/>
+            <column name="password" value="12345678"/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet id="1010000002" author="DOlenichenko">
+        <insert tableName="role">
+            <column name="name_role" value="Admin"/>
+        </insert>
+
+        <insert tableName="role">
+            <column name="name_role" value="Presenter"/>
+        </insert>
+
+        <insert tableName="role">
+            <column name="name_role" value="Listener"/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet id="1010000003" author="DOlenichenko">
+        <insert tableName="user_role">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="2"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="3"/>
+            <column name="role_id" value="3"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="4"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="5"/>
+            <column name="role_id" value="3"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="6"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="7"/>
+            <column name="role_id" value="3"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="8"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="9"/>
+            <column name="role_id" value="3"/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet id="1010000004" author="DOlenichenko">
+        <insert tableName="room">
+            <column name="name_room" value="1А"/>
+            <column name="number_of_seats" value="50"/>
+        </insert>
+        <insert tableName="room">
+            <column name="name_room" value="1Б"/>
+            <column name="number_of_seats" value="100"/>
+        </insert>
+        <insert tableName="room">
+            <column name="name_room" value="2А"/>
+            <column name="number_of_seats" value="150"/>
+        </insert>
+        <insert tableName="room">
+            <column name="name_room" value="2Б"/>
+            <column name="number_of_seats" value="200"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1010000005" author="DOlenichenko">
+        <insert tableName="presentation">
+            <column name="theme" value="Java"/>
+        </insert>
+        <insert tableName="presentation">
+            <column name="theme" value="Phyton"/>
+        </insert>
+        <insert tableName="presentation">
+            <column name="theme" value="C#"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1010000006" author="DOlenichenko">
+        <insert tableName="schedule">
+            <column name="room_id" value="1"/>
+            <column name="presentation_id" value="1"/>
+            <column name="time_begin" value="2021-01-10T09:00:00"/>
+            <column name="time_end" value="2021-01-10T12:00:00"/>
+            <column name="number_of_participants" value="21"/>
+        </insert>
+
+        <insert tableName="schedule">
+            <column name="room_id" value="2"/>
+            <column name="presentation_id" value="2"/>
+            <column name="time_begin" value="2021-01-10T09:00:00"/>
+            <column name="time_end" value="2021-01-10T12:00:00"/>
+            <column name="number_of_participants" value="51"/>
+        </insert>
+
+        <insert tableName="schedule">
+            <column name="room_id" value="1"/>
+            <column name="presentation_id" value="3"/>
+            <column name="time_begin" value="2021-01-10T13:00:00"/>
+            <column name="time_end" value="2021-01-10T14:00:00"/>
+            <column name="number_of_participants" value="11"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1010000007" author="DOlenichenko">
+        <insert tableName="participant">
+            <column name="user_id" value="2"/>
+            <column name="presentation_id" value="1"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+        <insert tableName="participant">
+            <column name="user_id" value="3"/>
+            <column name="presentation_id" value="1"/>
+            <column name="role_id" value="3"/>
+        </insert>
+
+        <insert tableName="participant">
+            <column name="user_id" value="4"/>
+            <column name="presentation_id" value="1"/>
+            <column name="role_id" value="3"/>
+        </insert>
+
+        <insert tableName="participant">
+            <column name="user_id" value="5"/>
+            <column name="presentation_id" value="1"/>
+            <column name="role_id" value="3"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
