@@ -8,6 +8,7 @@ import com.wavetest.test.entity.dto.ScheduleInfoDTO;
 import com.wavetest.test.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,8 +53,8 @@ public class PresentationService {
             schedule.setTimeEnd(endTimeNew);
             schedule = scheduleRepository.save(schedule);
 
-            //Todo: Получать id user`a из security
-            User newUser = userRepository.getById(2L);
+            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User newUser = userRepository.getById(user.getId());
 
             Role newRoleOnPresentation = roleRepository.getByNameRole("Presenter");
 
@@ -96,7 +97,6 @@ public class PresentationService {
     public void deletePresentationById(Long id) {
         Schedule scheduleOnDelete = scheduleRepository.findByPresentationId(id);
         scheduleRepository.delete(scheduleOnDelete);
-//        presentationRepository.deleteById(id);
     }
 
     @Transactional

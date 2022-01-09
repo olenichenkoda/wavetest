@@ -11,6 +11,7 @@ import com.wavetest.test.repository.RoleRepository;
 import com.wavetest.test.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,8 +46,10 @@ public class ParticipantService {
 
     @Transactional
     public ResponseEntity<?> deleteParticipantInPresentationId(Long presentationId) {
-        //TODO: достать userId из security
-        Long userId = 3L;
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Long userId = user.getId();
         Participant participant =
                 participantRepository.getAllParticipantByPresentationIdAndUserId(userId, presentationId);
         if (participant == null) {
@@ -55,8 +58,6 @@ public class ParticipantService {
             participantRepository.delete(participant);
             return ResponseEntity.ok("Участник удален");
         }
-
-
     }
 
     @Transactional
@@ -77,8 +78,8 @@ public class ParticipantService {
     @Transactional
     public ResponseEntity<?> signUpToPresentation(Long presentationId) {
 
-        //TODO: брать UserId из security
-        User user = userRepository.getById(6L);
+        User loginUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getById(loginUser.getId());
 
         Optional<Participant> isParticipantExists =
                 participantRepository.isParticipantExistsOnPresentation(user.getId(), presentationId);
