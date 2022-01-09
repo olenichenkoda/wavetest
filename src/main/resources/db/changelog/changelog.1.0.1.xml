@@ -9,63 +9,63 @@
             <column name="first_name" value="Admin"/>
             <column name="last_name" value="Root"/>
             <column name="email" value="admin@wavetest.com"/>
-            <column name="password" value="root"/>
+            <column name="password" value="$2a$10$R2gT4qIl/oK18aqXROvmnOIWllT218r543Arf7bC6/kUWGCrXKF9W"/>
         </insert>
 
         <insert tableName="user">
             <column name="first_name" value="Ivan"/>
             <column name="last_name" value="Ivanov"/>
             <column name="email" value="ivanov@wavetest.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="$2a$10$KZH/vH0fER45h20cHt3ukOZiOCCeVm.V1MfjnxY8KUoaI2qDjieVe"/>
         </insert>
 
         <insert tableName="user">
             <column name="first_name" value="Petr"/>
             <column name="last_name" value="Petrov"/>
             <column name="email" value="petrov@wavetest.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="$2a$10$KZH/vH0fER45h20cHt3ukOZiOCCeVm.V1MfjnxY8KUoaI2qDjieVe"/>
         </insert>
 
         <insert tableName="user">
             <column name="first_name" value="Mariya"/>
             <column name="last_name" value="Maslova"/>
             <column name="email" value="maslova@wavetest.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="$2a$10$KZH/vH0fER45h20cHt3ukOZiOCCeVm.V1MfjnxY8KUoaI2qDjieVe"/>
         </insert>
 
         <insert tableName="user">
             <column name="first_name" value="Olga"/>
             <column name="last_name" value="Sokolova"/>
             <column name="email" value="sokolova@wavetest.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="$2a$10$KZH/vH0fER45h20cHt3ukOZiOCCeVm.V1MfjnxY8KUoaI2qDjieVe"/>
         </insert>
 
         <insert tableName="user">
             <column name="first_name" value="Vasiliy"/>
             <column name="last_name" value="Vasiliev"/>
             <column name="email" value="vasiliev@wavetest.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="$2a$10$KZH/vH0fER45h20cHt3ukOZiOCCeVm.V1MfjnxY8KUoaI2qDjieVe"/>
         </insert>
 
         <insert tableName="user">
             <column name="first_name" value="Aleksandr"/>
             <column name="last_name" value="Aleksandrov"/>
             <column name="email" value="aleksandrov@wavetest.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="$2a$10$KZH/vH0fER45h20cHt3ukOZiOCCeVm.V1MfjnxY8KUoaI2qDjieVe"/>
         </insert>
 
         <insert tableName="user">
             <column name="first_name" value="Elena"/>
             <column name="last_name" value="Esenina"/>
             <column name="email" value="esenina@wavetest.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="$2a$10$KZH/vH0fER45h20cHt3ukOZiOCCeVm.V1MfjnxY8KUoaI2qDjieVe"/>
         </insert>
 
         <insert tableName="user">
             <column name="first_name" value="Anna"/>
             <column name="last_name" value="Anyukova"/>
             <column name="email" value="anyukova@wavetest.com"/>
-            <column name="password" value="12345678"/>
+            <column name="password" value="$2a$10$KZH/vH0fER45h20cHt3ukOZiOCCeVm.V1MfjnxY8KUoaI2qDjieVe"/>
         </insert>
 
     </changeSet>
